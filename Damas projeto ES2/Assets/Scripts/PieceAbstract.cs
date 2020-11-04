@@ -4,8 +4,14 @@ using UnityEngine;
 
 public abstract class PieceAbstract : MonoBehaviour
 {
-    
-    public abstract List<PiecePositionV2> Move();
-    public abstract PiecePositionV2 Eat();
+
+    public PieceFiliation filiation;
+    public abstract List<PieceMoveV2> Move();
+    public abstract List<PieceEatV2> Eat();
+
+    public bool HasSameFiliation(PieceAbstract otherPiece)
+    {
+        return filiation == otherPiece.filiation;
+    }
 
 }
