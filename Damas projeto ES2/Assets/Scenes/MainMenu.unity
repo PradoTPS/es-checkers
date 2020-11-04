@@ -276,9 +276,7 @@ PrefabInstance:
     - target: {fileID: 2310456751596414700, guid: 95e7317d71880584899da7d0c795704b,
         type: 3}
       propertyPath: m_text
-      value: 'Start
-
-'
+      value: "Come\xE7ar jogo"
       objectReference: {fileID: 0}
     - target: {fileID: 2310456751596414700, guid: 95e7317d71880584899da7d0c795704b,
         type: 3}
@@ -806,7 +804,7 @@ PrefabInstance:
     - target: {fileID: 2310456751596414700, guid: 95e7317d71880584899da7d0c795704b,
         type: 3}
       propertyPath: m_text
-      value: Exit
+      value: Sair
       objectReference: {fileID: 0}
     - target: {fileID: 2310456751596414700, guid: 95e7317d71880584899da7d0c795704b,
         type: 3}
