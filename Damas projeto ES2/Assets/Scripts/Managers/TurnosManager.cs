@@ -18,6 +18,7 @@ public class TurnosManager : Singleton<TurnosManager>
     public void ChangeTurno()
     {
         turnoFiliation = turnoFiliation == PieceFiliation.player1 ? PieceFiliation.player2 : PieceFiliation.player1;
+        GameManager.Instance.OnTurnoChange();
     }
 
 }

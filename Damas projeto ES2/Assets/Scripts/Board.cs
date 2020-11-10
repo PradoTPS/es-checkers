@@ -214,6 +214,7 @@ public class Board : MonoBehaviour
                     piece.filiation = filiation;
                     tileToPutInto.MyPiece = piece;
 
+                    GameManager.Instance.RegisterPiece(piece);
                 }
                     
 
@@ -248,7 +249,10 @@ public class Board : MonoBehaviour
             if (movementToMake.HasTileToEat)
             {
                 Tile eatenTile = movementToMake.eatenTile;
-                PlacarManager.Instance.PieceEaten(eatenTile.MyPiece.filiation);
+
+                PlacarManager.Instance.PieceEaten(eatenTile.MyPiece);
+                GameManager.Instance.UnregisterPiece(eatenTile.MyPiece);
+                
                 Destroy(eatenTile.MyPiece.gameObject);
                 eatenTile.MyPiece = null;
             }
