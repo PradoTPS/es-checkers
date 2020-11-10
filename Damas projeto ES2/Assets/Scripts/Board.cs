@@ -77,10 +77,10 @@ public class Board : MonoBehaviour
 
         for(int i = 0; i < matrixWidth; i++)
         {
-            float lineY = initialPosition.y + 1 * i;
+            float lineX = initialPosition.x + 1 * i;
             for(int j = 0; j < matrixHeight; j++)
             {
-                float lineX = initialPosition.x + 1 * j;
+                float lineY = initialPosition.y + 1 * j;
 
                 //Se i+j for par, usa o darkTile, caso contrário usa o light
                 prefabToIntantiate = (i + j) % 2 == 0 ? darkTilePrefab : lightTilePrefab;
@@ -111,9 +111,9 @@ public class Board : MonoBehaviour
 
     private void SpawnPieceInThisSubMatrix(int linhaI, int linhaF, int colunaI, int colunaF, PieceFiliation filiation)
     {
-        for(int i = linhaI; i < linhaF; i++)
+        for(int i = colunaI; i < colunaF; i++)
         {
-            for(int j = colunaI; j < colunaF; j++)
+            for(int j = linhaI; j < linhaF; j++)
             {
                 if ((i + j) % 2 == 0)
                 {
@@ -146,7 +146,7 @@ public class Board : MonoBehaviour
 
 
         var positionsList = GetPositionsToMove(tileToGetPieceFrom);
-        MovementInBoard movementToMake = GetMovementFromTileInList(positionsList, tileToPutPieceOn);
+        MovementInBoard movementToMake = GetMovementFromListWithTile(positionsList, tileToPutPieceOn);
 
         if (movementToMake != null)
         {
@@ -223,31 +223,47 @@ public class Board : MonoBehaviour
     {
         var movementList = new List<MovementInBoard>();
         var tilePos = new Vector2Int(tileWithPiece.xPosInMat, tileWithPiece.yPosInMat);
-        
+
         var listToEat = tileWithPiece.MyPiece.Eat();
         foreach(var eatPos in listToEat)
         {
+            EatRecursive(tilePos, eatPos, movementList, tileWithPiece.MyPiece.filiation);
+        }
 
-            var movementAfterEatingPos = tilePos + new Vector2Int(eatPos.x, eatPos.y);
-            if (IsInBoardRanges(movementAfterEatingPos) && !HasPieceInPos(movementAfterEatingPos))
+
+
+
+        return movementList;
+    }
+
+    private void EatRecursive(Vector2Int currentCheckPos, PieceEatV2 eatPos, List<MovementInBoard> movementList, PieceFiliation eaterFiliation)
+    {
+        var afterEatingPos = currentCheckPos + new Vector2Int(eatPos.x, eatPos.y);
+
+        if (IsInBoardRanges(afterEatingPos))
+        {
+            var otherPiecePos = currentCheckPos + new Vector2Int(eatPos.otherPieceX, eatPos.otherPieceY);
+            
+            if (!HasPieceInPos(afterEatingPos) && HasPieceInPos(otherPiecePos))
             {
-                var otherPiecePos = tilePos + new Vector2Int(eatPos.otherPieceX, eatPos.otherPieceY);
                 var otherPieceTile = tilesMatrix[otherPiecePos.x, otherPiecePos.y];
-                if (HasPieceInPos(otherPiecePos)
-                    && !tileWithPiece.MyPiece
-                    .HasSameFiliation(otherPieceTile.MyPiece))
+                if(otherPieceTile.MyPiece.filiation != eaterFiliation)
                 {
-                    Tile moveTo = tilesMatrix[movementAfterEatingPos.x, movementAfterEatingPos.y];
+                    Tile moveTo = tilesMatrix[afterEatingPos.x, afterEatingPos.y];
                     Tile eatenPiece = tilesMatrix[otherPiecePos.x, otherPiecePos.y];
 
                     movementList.Add(new MovementInBoard(moveTo, eatenPiece));
                 }
             }
-
+            else
+            {
+          
+                if(tilesMatrix[afterEatingPos.x, afterEatingPos.y].MyPiece?.filiation != eaterFiliation && eatPos.recursive)
+                    EatRecursive(otherPiecePos, eatPos, movementList, eaterFiliation);
+            }
         }
-
-        return movementList;
     }
+
 
     private void SelectTile(Vector2 tileToSelect)
     {
@@ -277,7 +293,7 @@ public class Board : MonoBehaviour
         return IsInBoardRanges(tile.xPosInMat, tile.yPosInMat);
     }
 
-    private MovementInBoard GetMovementFromTileInList(List<MovementInBoard> list, Tile tile)
+    private MovementInBoard GetMovementFromListWithTile(List<MovementInBoard> list, Tile tile)
     {
         foreach(var movement in list)
         {

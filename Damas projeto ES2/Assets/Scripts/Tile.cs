@@ -5,8 +5,23 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
 
-    [HideInInspector] public int xPosInMat = -1;
-    [HideInInspector] public int yPosInMat = -1;
+    public Board Board { private get => myBoard; set => myBoard = value; }
+    public PieceAbstract MyPiece 
+    { 
+        get => myPiece; 
+        set
+        {
+            myPiece = value;
+
+            if(myPiece != null)
+                myPiece.transform.position = PiecePosition.position;
+        } 
+    }
+    public bool HasPiece { get => myPiece != null; }
+    public Transform PiecePosition { get => piecePosition; set => piecePosition = value; }
+
+     public int xPosInMat = -1;
+     public int yPosInMat = -1;
 
     public PieceAbstract myPiece = null;
 
