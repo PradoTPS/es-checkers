@@ -20,10 +20,10 @@ public class KingPiece : PieceAbstract
     {
         List<PieceEatV2> eatOptionsList = new List<PieceEatV2>();
 
-        eatOptionsList.Add(new PieceEatV2(-2, -2, -1, -1));
-        eatOptionsList.Add(new PieceEatV2(-2, 2, -1, 1));
-        eatOptionsList.Add(new PieceEatV2(2, -2, 1, -1));
-        eatOptionsList.Add(new PieceEatV2(2, 2, 1, 1));
+        eatOptionsList.Add(new PieceEatV2(-2, -2, -1, -1, true));
+        eatOptionsList.Add(new PieceEatV2(-2, 2, -1, 1, true));
+        eatOptionsList.Add(new PieceEatV2(2, -2, 1, -1, true));
+        eatOptionsList.Add(new PieceEatV2(2, 2, 1, 1, true));
 
         return eatOptionsList;
     }
