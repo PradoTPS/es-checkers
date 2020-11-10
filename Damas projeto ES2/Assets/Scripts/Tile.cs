@@ -2,35 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tile : MonoBehaviour
+public class Tile : Selectable
 {
+
+    public Board Board { private get => myBoard; set => myBoard = value; }
+    public PieceAbstract MyPiece 
+    { 
+        get => myPiece; 
+        set
+        {
+            myPiece = value;
+
+            if(myPiece != null)
+                myPiece.transform.position = PiecePosition.position;
+        } 
+    }
+    public bool HasPiece { get => myPiece != null; }
+    public Transform PiecePosition { get => piecePosition; set => piecePosition = value; }
 
     [HideInInspector] public int xPosInMat = -1;
     [HideInInspector] public int yPosInMat = -1;
 
-    public PieceAbstract myPiece = null;
 
-    //Function called by Unity when mouse is over the object
-    private void OnMouseEnter()
+    private PieceAbstract myPiece = null;
+    private Board myBoard = null;
+
+    [Header("Scene References")]
+    [SerializeField] private Transform piecePosition = null;
+
+    #region Unity functions
+    protected override void OnMouseDown()
     {
-        //change color to hover
+        myBoard.SelectTile(this);
     }
 
-    //Function called by Unity when mouse exits the object
-    private void OnMouseExit()
-    {
-        //change color to normal
-    }
 
-    //Function called by Unity when mouse in clicked over the object
-    private void OnMouseDown()
-    {
-        //Call select function on board
-    }
-
+    #endregion
     public void SetMatrixCoordinates(int x, int y)
     {
         xPosInMat = x;
         yPosInMat = y;
     }
+
+
 }
