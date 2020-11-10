@@ -97,7 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9e13faeb853bf24bad5e4afff279f02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedColor: {r: 1, g: 0.015686274, b: 0.19445182, a: 1}
+  selectedColor: {r: 1, g: 0.08701119, b: 0, a: 1}
+  movementSelected: {r: 0, g: 1, b: 0, a: 1}
+  tileInCheck: {r: 1, g: 0, b: 0, a: 1}
   hoveredColor: {r: 0.7647059, g: 0.7647059, b: 0.7647059, a: 1}
   xPosInMat: -1
   yPosInMat: -1

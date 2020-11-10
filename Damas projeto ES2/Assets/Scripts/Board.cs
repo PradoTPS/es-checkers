@@ -43,6 +43,8 @@ public class Board : MonoBehaviour
     public void SelectTile(Tile tileToSelect)
     {
 
+        if (tileToSelect.HasPiece && !TurnosManager.Instance.CanDoAction(tileToSelect.MyPiece.filiation))
+            return;
 
         bool shouldMove = false;
         Tile tileToMove = null;
@@ -90,6 +92,7 @@ public class Board : MonoBehaviour
             if (shouldMove)
             {
                 DoMove(tileToMove, tileToSelect, movementList);
+                TurnosManager.Instance.ChangeTurno();
                 currentSelectedTile.IsSelected = false;
                 currentSelectedTile = null;
                 //ResetMovementSelectedTiles();
