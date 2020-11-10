@@ -248,6 +248,7 @@ public class Board : MonoBehaviour
             if (movementToMake.HasTileToEat)
             {
                 Tile eatenTile = movementToMake.eatenTile;
+                PlacarManager.Instance.PieceEaten(eatenTile.MyPiece.filiation);
                 Destroy(eatenTile.MyPiece.gameObject);
                 eatenTile.MyPiece = null;
             }
