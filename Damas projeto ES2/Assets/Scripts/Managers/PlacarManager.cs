@@ -13,8 +13,10 @@ public class PlacarManager : Singleton<PlacarManager>
     [SerializeField] private TextMeshProUGUI player2Text = null;
 
 
-    public void PieceEaten(PieceFiliation filiation)
+    public void PieceEaten(PieceAbstract piece)
     {
+        PieceFiliation filiation = piece.filiation;
+
         if (filiation == PieceFiliation.player1)
             player2Points += 1;
         
