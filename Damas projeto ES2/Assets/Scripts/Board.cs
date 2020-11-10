@@ -29,6 +29,7 @@ public class Board : MonoBehaviour
     [SerializeField] private GameObject lightPiece = null;
 
     private Tile currentSelectedTile = null;
+    private List<Tile> possibleMovementSelected = new List<Tile>();
 
     //Funcion called by unity when object is created
     private void Awake()
@@ -42,27 +43,108 @@ public class Board : MonoBehaviour
     public void SelectTile(Tile tileToSelect)
     {
 
+
+        bool shouldMove = false;
+        Tile tileToMove = null;
+
         if(currentSelectedTile == null)
         {
             currentSelectedTile = tileToSelect;
             tileToSelect.IsSelected = true;
         }
+        else if(currentSelectedTile == tileToSelect)
+        {
+            currentSelectedTile.IsSelected = false;
+            currentSelectedTile = null;
+        }
         else
         {
-            if (currentSelectedTile.HasPiece)
+            if (currentSelectedTile.HasPiece && !tileToSelect.HasPiece)
             {
-                if (!tileToSelect.HasPiece)
+                if (IsTileInMovementList(tileToSelect))
                 {
-                    TryMovePieceFromTileToOther(currentSelectedTile, tileToSelect);
+                    tileToMove = currentSelectedTile;
+                    shouldMove = true;
                 }
+
             }
+            else
+            {
+                currentSelectedTile.IsSelected = false;
+                currentSelectedTile = tileToSelect;
+                tileToSelect.IsSelected = true;
+            }
+
+
+
              
-
-            currentSelectedTile.IsSelected = false;
-
-            currentSelectedTile = tileToSelect;
-            tileToSelect.IsSelected = true;
         }
+
+
+        ResetMovementSelectedTiles();
+        if(currentSelectedTile != null && currentSelectedTile.HasPiece)
+        {
+            
+            var movementList = GetPossibleMovementsList(currentSelectedTile);
+
+            if (shouldMove)
+            {
+                DoMove(tileToMove, tileToSelect, movementList);
+                currentSelectedTile.IsSelected = false;
+                currentSelectedTile = null;
+                //ResetMovementSelectedTiles();
+                return;
+            }
+
+            HighLightPossibleMovements(movementList);
+
+        }
+
+
+    }
+
+    private bool IsTileInMovementList(Tile tileToSelect)
+    {
+        foreach(var tile in possibleMovementSelected)
+        {
+            if(tile == tileToSelect)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void HighLightPossibleMovements(List<MovementInBoard> possibleMovements)
+    {
+        if (possibleMovements == null)
+            return;
+
+        foreach(var movement in possibleMovements)
+        {
+            if (movement.HasTileToEat)
+            {
+                movement.eatenTile.State = SelectableColor.tileInCheck;
+                possibleMovementSelected.Add(movement.eatenTile);
+
+            }
+
+            movement.endMovementTile.State = SelectableColor.movementSelected;
+            possibleMovementSelected.Add(movement.endMovementTile);
+
+        }
+    }
+
+    private void ResetMovementSelectedTiles()
+    {
+
+        foreach(var tile in possibleMovementSelected)
+        {
+            tile.State = SelectableColor.initial;
+        }
+
+        possibleMovementSelected.Clear();
     }
 
     private void InitializeMatrix()
@@ -136,18 +218,27 @@ public class Board : MonoBehaviour
         }
     }
 
-    private void TryMovePieceFromTileToOther(Tile tileToGetPieceFrom, Tile tileToPutPieceOn)
+    private List<MovementInBoard> GetPossibleMovementsList(Tile tileToGetPieceFrom)
     {
-        if (tileToGetPieceFrom.MyPiece == null || tileToPutPieceOn.MyPiece != null)
+        if (tileToGetPieceFrom.MyPiece == null)
         {
             Debug.LogWarning("[Board] Calling MovePiece with incorrect configuration");
-            return;
+            return null;
         }
 
 
         var positionsList = GetPositionsToMove(tileToGetPieceFrom);
-        MovementInBoard movementToMake = GetMovementFromListWithTile(positionsList, tileToPutPieceOn);
 
+        return positionsList;
+    }
+
+    private void DoMove(Tile tileToGetPieceFrom, Tile tileToPutPieceOn, List<MovementInBoard> positionsList)
+    {
+
+        if (positionsList == null)
+            return;
+
+        MovementInBoard movementToMake = GetMovementFromListWithTile(positionsList, tileToPutPieceOn);
         if (movementToMake != null)
         {
 
@@ -157,9 +248,11 @@ public class Board : MonoBehaviour
                 Destroy(eatenTile.MyPiece.gameObject);
                 eatenTile.MyPiece = null;
             }
-            
+
             tileToPutPieceOn.MyPiece = tileToGetPieceFrom.MyPiece;
             tileToGetPieceFrom.MyPiece = null;
+
+            positionsList.Remove(movementToMake);
         }
     }
 
@@ -263,7 +356,6 @@ public class Board : MonoBehaviour
             }
         }
     }
-
 
     private void SelectTile(Vector2 tileToSelect)
     {

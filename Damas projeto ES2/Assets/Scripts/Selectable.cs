@@ -16,6 +16,7 @@ public class Selectable : MonoBehaviour
         set
         {
             isSelected = value;
+            State = isSelected ? SelectableColor.selected : SelectableColor.initial;
             UpdateColorAcorddingToState();
         }
     }
@@ -27,7 +28,20 @@ public class Selectable : MonoBehaviour
     protected bool isSelected = false;
     protected bool isHovered = false;
 
+    public SelectableColor State
+    { 
+        get => state;
+        set
+        {
+            state = value;
+            UpdateColorAcorddingToState();
+        } 
+    }
+    private SelectableColor state;
+
     [SerializeField] private Color selectedColor = Color.yellow;
+    [SerializeField] private Color movementSelected = Color.green;
+    [SerializeField] private Color tileInCheck = Color.red;
     [SerializeField] private Color hoveredColor = Color.grey;
     private Color initialColor = Color.white;   //overriden in awake
 
@@ -66,13 +80,30 @@ public class Selectable : MonoBehaviour
     protected void UpdateColorAcorddingToState()
     {
         Color colorToSet;
-        if (isSelected)
+
+        switch (State)
         {
-            colorToSet = selectedColor;
-        }
-        else
-        {
-            colorToSet = isHovered ? hoveredColor : initialColor;
+
+            case SelectableColor.hovered:
+                colorToSet = hoveredColor;
+                break;
+
+            case SelectableColor.selected:
+                colorToSet = selectedColor;
+                break;
+
+            case SelectableColor.movementSelected:
+                colorToSet = movementSelected;
+                break;
+
+            case SelectableColor.tileInCheck:
+                colorToSet = tileInCheck;
+                break;
+
+            default:
+                colorToSet = initialColor;
+                break;
+           
         }
 
         SetColor(colorToSet);
@@ -86,7 +117,13 @@ public class Selectable : MonoBehaviour
         myRenderer.color = newColor;
     }
 
+}
 
-
-
+public enum SelectableColor
+{
+    initial,
+    hovered,
+    selected,
+    tileInCheck,
+    movementSelected
 }
