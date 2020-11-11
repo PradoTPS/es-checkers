@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
 
+    [SerializeField] private EndGameCanvasController endGameUI = null;
 
     private List<PieceAbstract> player1Pieces = new List<PieceAbstract>();
     private List<PieceAbstract> player2Pieces = new List<PieceAbstract>();
@@ -64,12 +65,22 @@ public class GameManager : Singleton<GameManager>
 
     private void EndGame()
     {
-        Debug.Log("EndGame");
+        if(player1Pieces.Count > player2Pieces.Count)
+        {
+            endGameUI.SetText("Player1 venceu");
+        }
+        else
+        {
+            endGameUI.SetText("Player2 venceu");
+        }
+
+        CanvasManager.Instance.SwitchState(CanvasType.EndGame);
     }
 
     private void TieGame()
     {
-        Debug.Log("Tie");
+        endGameUI.SetText("Empate!");
+        CanvasManager.Instance.SwitchState(CanvasType.EndGame);
     }
 
 }
