@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NormalPiece : PieceAbstract
+public class NormalPiece : PieceAbstract, INormalPiece
 {
 
     public override List<PieceMoveV2> Move()

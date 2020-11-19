@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class PieceAbstract : MonoBehaviour
+public abstract class PieceAbstract : MonoBehaviour, IPieceAbstract
 {
 
-    public PieceFiliation filiation;
+    private PieceFiliation filiation;
+
+    public PieceFiliation Filiation { get => filiation; set => filiation = value; }
+
     public abstract List<PieceMoveV2> Move();
     public abstract List<PieceEatV2> Eat();
 
     public bool HasSameFiliation(PieceAbstract otherPiece)
     {
-        return filiation == otherPiece.filiation;
+        return Filiation == otherPiece.Filiation;
     }
 
 }

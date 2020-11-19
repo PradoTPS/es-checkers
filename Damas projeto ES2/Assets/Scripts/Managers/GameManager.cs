@@ -15,17 +15,17 @@ public class GameManager : Singleton<GameManager>
 
     public void RegisterPiece(PieceAbstract piece)
     {
-        if (piece.filiation == PieceFiliation.player1)
+        if (piece.Filiation == PieceFiliation.player1)
             player1Pieces.Add(piece);
-        if (piece.filiation == PieceFiliation.player2)
+        if (piece.Filiation == PieceFiliation.player2)
             player2Pieces.Add(piece);
     }
 
     public void UnregisterPiece(PieceAbstract piece)
     {
-        if (piece.filiation == PieceFiliation.player1)
+        if (piece.Filiation == PieceFiliation.player1)
             player1Pieces.Remove(piece);
-        if (piece.filiation == PieceFiliation.player2)
+        if (piece.Filiation == PieceFiliation.player2)
             player2Pieces.Remove(piece);
 
         CheckForEndGameConditions();
