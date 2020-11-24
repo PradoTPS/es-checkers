@@ -377,7 +377,7 @@ MonoBehaviour:
     type: 3}
   lightTilePrefab: {fileID: 2602958593831594917, guid: 74b7be760824270408af5456a1f7ca90,
     type: 3}
-  darkPiece: {fileID: 8910720149598468530, guid: 2bdda9a2735ff6d41977ab113b5c0872,
+  darkPiece: {fileID: 5752930516480521458, guid: 227ac260fc0ece842967837e1d91a9ef,
     type: 3}
   lightPiece: {fileID: 3886841727950197445, guid: ae4281e0523704447b71dc1ee31857ff,
     type: 3}
