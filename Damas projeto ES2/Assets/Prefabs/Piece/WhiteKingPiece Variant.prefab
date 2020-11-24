@@ -13,6 +13,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -1813906250343060676, guid: ddaf419d61b54ad43b8bfab6e35fdca0,
         type: 3}
+    - target: {fileID: 7269734715698203058, guid: 9b17dad6268133745bc44fb5aff83554,
+        type: 3}
+      propertyPath: filiation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7269734715698203059, guid: 9b17dad6268133745bc44fb5aff83554,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -71,7 +76,7 @@ PrefabInstance:
     - target: {fileID: 7269734715698203061, guid: 9b17dad6268133745bc44fb5aff83554,
         type: 3}
       propertyPath: m_Name
-      value: WhiteKingPiece
+      value: WhiteKingPiece Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b17dad6268133745bc44fb5aff83554, type: 3}
