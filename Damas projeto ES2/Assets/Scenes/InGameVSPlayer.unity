@@ -657,7 +657,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Placar:'
+  m_text: 'Placar: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d820eaedaca8cec44abd953239e9102f, type: 2}
   m_sharedMaterial: {fileID: 3922626223757396753, guid: d820eaedaca8cec44abd953239e9102f,
@@ -1248,7 +1248,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Placar: '
+  m_text: 'Placar: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d820eaedaca8cec44abd953239e9102f, type: 2}
   m_sharedMaterial: {fileID: 3922626223757396753, guid: d820eaedaca8cec44abd953239e9102f,
