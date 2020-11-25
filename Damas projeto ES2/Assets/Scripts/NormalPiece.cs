@@ -9,10 +9,17 @@ public class NormalPiece : PieceAbstract, INormalPiece
     {
         List<PieceMoveV2> moveOptionsList = new List<PieceMoveV2>();
 
-        moveOptionsList.Add(new PieceMoveV2(-1, -1));
-        moveOptionsList.Add(new PieceMoveV2(-1, 1));
-        moveOptionsList.Add(new PieceMoveV2(1, -1));
-        moveOptionsList.Add(new PieceMoveV2(1, 1));
+        if(filiation == PieceFiliation.player1)
+        {
+            moveOptionsList.Add(new PieceMoveV2(-1, 1));
+            moveOptionsList.Add(new PieceMoveV2(1, 1));
+        }
+        else
+        {
+            moveOptionsList.Add(new PieceMoveV2(-1, -1));
+            moveOptionsList.Add(new PieceMoveV2(1, -1));
+        }
+
 
         return moveOptionsList;
     }

@@ -1446,6 +1446,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnoFiliation: 0
+  panelP1: {fileID: 1194887447}
+  panelP2: {fileID: 339466860}
 --- !u!4 &790698334
 Transform:
   m_ObjectHideFlags: 0

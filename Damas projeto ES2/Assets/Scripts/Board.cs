@@ -236,7 +236,7 @@ public class Board : MonoBehaviour
         return positionsList;
     }
 
-    private void DoMove(Tile tileToGetPieceFrom, Tile tileToPutPieceOn, List<MovementInBoard> positionsList)
+    public void DoMove(Tile tileToGetPieceFrom, Tile tileToPutPieceOn, List<MovementInBoard> positionsList)
     {
 
         if (positionsList == null)
@@ -264,7 +264,7 @@ public class Board : MonoBehaviour
         }
     }
 
-    private List<MovementInBoard> GetPositionsToMove(Tile tileWithPiece)
+    public List<MovementInBoard> GetPositionsToMove(Tile tileWithPiece)
     {
 
         List<MovementInBoard> tilesToMoveTo = new List<MovementInBoard>();
@@ -320,7 +320,7 @@ public class Board : MonoBehaviour
 
     }
 
-    private List<MovementInBoard> CanEatAny(Tile tileWithPiece)
+    public List<MovementInBoard> CanEatAny(Tile tileWithPiece)
     {
         var movementList = new List<MovementInBoard>();
         var tilePos = new Vector2Int(tileWithPiece.xPosInMat, tileWithPiece.yPosInMat);
