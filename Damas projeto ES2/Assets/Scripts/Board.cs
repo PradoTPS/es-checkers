@@ -86,17 +86,22 @@ public class Board : MonoBehaviour
         ResetMovementSelectedTiles();
         if(currentSelectedTile != null && currentSelectedTile.HasPiece)
         {
-            
+
+            if ((WhoCanEatAny().Count > 0 && !WhoCanEatAny().Contains(currentSelectedTile)))
+                return;
+
             var movementList = GetPossibleMovementsList(currentSelectedTile);
 
             if (shouldMove)
             {
+
                 DoMove(tileToMove, tileToSelect, movementList);
                 TurnosManager.Instance.ChangeTurno();
                 currentSelectedTile.IsSelected = false;
                 currentSelectedTile = null;
                 //ResetMovementSelectedTiles();
                 return;
+
             }
 
             HighLightPossibleMovements(movementList);
@@ -222,6 +227,23 @@ public class Board : MonoBehaviour
         }
     }
 
+    private List<Tile> WhoCanEatAny()
+    {
+        var list = new List<Tile>();
+        foreach(var tile in tilesMatrix)
+        {
+            if (tile.HasPiece)
+            {
+                if(TurnosManager.Instance.CanDoAction(tile.MyPiece.Filiation) && CanEatAny(tile).Count > 0)
+                {
+                    list.Add(tile);
+                }
+            }
+        }
+
+        return list;
+    }
+
     private List<MovementInBoard> GetPossibleMovementsList(Tile tileToGetPieceFrom)
     {
         if (tileToGetPieceFrom.MyPiece == null)
@@ -242,6 +264,8 @@ public class Board : MonoBehaviour
         if (positionsList == null)
             return;
 
+        bool hasEaten = false;
+
         MovementInBoard movementToMake = GetMovementFromListWithTile(positionsList, tileToPutPieceOn);
         if (movementToMake != null)
         {
@@ -250,12 +274,14 @@ public class Board : MonoBehaviour
             {
                 Tile eatenTile = movementToMake.eatenTile;
 
-                TurnosManager.Instance.BlockNextTurnChange();
                 PlacarManager.Instance.PieceEaten(eatenTile.MyPiece);
                 GameManager.Instance.UnregisterPiece(eatenTile.MyPiece);
                 
                 Destroy(eatenTile.MyPiece.gameObject);
                 eatenTile.MyPiece = null;
+
+                hasEaten = true;
+
             }
 
 
@@ -284,6 +310,16 @@ public class Board : MonoBehaviour
             }
 
             tileToGetPieceFrom.MyPiece = null;
+
+            if (hasEaten)
+            {
+                //Depois de comer
+                if (CanEatAny(tileToPutPieceOn).Count > 0)
+                {
+                    TurnosManager.Instance.BlockNextTurnChange();
+                }
+
+            }
 
             positionsList.Remove(movementToMake);
         }
