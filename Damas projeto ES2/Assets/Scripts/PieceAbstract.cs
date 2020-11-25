@@ -34,7 +34,7 @@ public abstract class PieceAbstract : MonoBehaviour, IPieceAbstract
         promoted.transform.position = this.transform.position;
         promoted.Filiation = this.filiation;
 
-        DestroyAfterFrame();
+        StartCoroutine(DestroyAfterFrame());
 
         return promoted;
     }
