@@ -257,7 +257,31 @@ public class Board : MonoBehaviour
                 eatenTile.MyPiece = null;
             }
 
-            tileToPutPieceOn.MyPiece = tileToGetPieceFrom.MyPiece;
+
+            if(tileToGetPieceFrom.MyPiece.Filiation == PieceFiliation.player1)
+            {
+                if (tileToPutPieceOn.yPosInMat == matrixHeight - 1)
+                {
+                    tileToPutPieceOn.MyPiece = tileToGetPieceFrom.MyPiece.Promote();
+                }
+                else
+                {
+                    tileToPutPieceOn.MyPiece = tileToGetPieceFrom.MyPiece;
+                }
+
+            }
+            else
+            {
+                if (tileToPutPieceOn.yPosInMat == 0)
+                {
+                    tileToPutPieceOn.MyPiece = tileToGetPieceFrom.MyPiece.Promote();
+                }
+                else
+                {
+                    tileToPutPieceOn.MyPiece = tileToGetPieceFrom.MyPiece;
+                }
+            }
+
             tileToGetPieceFrom.MyPiece = null;
 
             positionsList.Remove(movementToMake);

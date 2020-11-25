@@ -78,5 +78,11 @@ PrefabInstance:
       propertyPath: filiation
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8087485918862710669, guid: bb6dbb50e9e7a2245bda7638b4c31d62,
+        type: 3}
+      propertyPath: promoteTo
+      value: 
+      objectReference: {fileID: 6353437998076855802, guid: 03bde93eaacef5441adf5a9c21223e80,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb6dbb50e9e7a2245bda7638b4c31d62, type: 3}

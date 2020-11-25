@@ -73,5 +73,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlackPiece Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8087485918862710669, guid: bb6dbb50e9e7a2245bda7638b4c31d62,
+        type: 3}
+      propertyPath: promoteTo
+      value: 
+      objectReference: {fileID: 8910720149598468533, guid: 2bdda9a2735ff6d41977ab113b5c0872,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb6dbb50e9e7a2245bda7638b4c31d62, type: 3}
