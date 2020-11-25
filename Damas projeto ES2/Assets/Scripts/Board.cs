@@ -188,9 +188,9 @@ public class Board : MonoBehaviour
     {
 
         // Spawn one side
-        SpawnPieceInThisSubMatrix(0, 3, 0, matrixWidth, PieceFiliation.player1);
+        SpawnPieceInThisSubMatrix(0, matrixHeight/2 - 1, 0, matrixWidth, PieceFiliation.player1);
         //Spawn other side
-        SpawnPieceInThisSubMatrix(5, matrixHeight, 0, matrixWidth, PieceFiliation.player2);
+        SpawnPieceInThisSubMatrix(matrixHeight/2 + 1, matrixHeight, 0, matrixWidth, PieceFiliation.player2);
 
     }
 
