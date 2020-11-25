@@ -43,7 +43,7 @@ public class Board : MonoBehaviour
     public void SelectTile(Tile tileToSelect)
     {
 
-        if (tileToSelect.HasPiece && !TurnosManager.Instance.CanDoAction(tileToSelect.MyPiece.filiation))
+        if (tileToSelect.HasPiece && !TurnosManager.Instance.CanDoAction(tileToSelect.MyPiece.Filiation))
             return;
 
         bool shouldMove = false;
@@ -211,7 +211,7 @@ public class Board : MonoBehaviour
 
 
                     PieceAbstract piece = Instantiate(prefabToInstantiate, positionToSpawn, Quaternion.identity).GetComponent<PieceAbstract>();
-                    piece.filiation = filiation;
+                    piece.Filiation = filiation;
                     tileToPutInto.MyPiece = piece;
 
                     GameManager.Instance.RegisterPiece(piece);
@@ -328,7 +328,7 @@ public class Board : MonoBehaviour
         var listToEat = tileWithPiece.MyPiece.Eat();
         foreach(var eatPos in listToEat)
         {
-            EatRecursive(tilePos, eatPos, movementList, tileWithPiece.MyPiece.filiation);
+            EatRecursive(tilePos, eatPos, movementList, tileWithPiece.MyPiece.Filiation);
         }
 
 
@@ -348,7 +348,7 @@ public class Board : MonoBehaviour
             if (!HasPieceInPos(afterEatingPos) && HasPieceInPos(otherPiecePos))
             {
                 var otherPieceTile = tilesMatrix[otherPiecePos.x, otherPiecePos.y];
-                if(otherPieceTile.MyPiece.filiation != eaterFiliation)
+                if(otherPieceTile.MyPiece.Filiation != eaterFiliation)
                 {
                     Tile moveTo = tilesMatrix[afterEatingPos.x, afterEatingPos.y];
                     Tile eatenPiece = tilesMatrix[otherPiecePos.x, otherPiecePos.y];
@@ -359,7 +359,7 @@ public class Board : MonoBehaviour
             else
             {
           
-                if(tilesMatrix[afterEatingPos.x, afterEatingPos.y].MyPiece?.filiation != eaterFiliation && eatPos.recursive)
+                if(tilesMatrix[afterEatingPos.x, afterEatingPos.y].MyPiece?.Filiation != eaterFiliation && eatPos.recursive)
                     EatRecursive(otherPiecePos, eatPos, movementList, eaterFiliation);
             }
         }

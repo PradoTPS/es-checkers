@@ -15,7 +15,7 @@ public class PlacarManager : Singleton<PlacarManager>
 
     public void PieceEaten(PieceAbstract piece)
     {
-        PieceFiliation filiation = piece.filiation;
+        PieceFiliation filiation = piece.Filiation;
 
         if (filiation == PieceFiliation.player1)
             player2Points += 1;
