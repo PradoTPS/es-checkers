@@ -250,6 +250,7 @@ public class Board : MonoBehaviour
             {
                 Tile eatenTile = movementToMake.eatenTile;
 
+                TurnosManager.Instance.BlockNextTurnChange();
                 PlacarManager.Instance.PieceEaten(eatenTile.MyPiece);
                 GameManager.Instance.UnregisterPiece(eatenTile.MyPiece);
                 

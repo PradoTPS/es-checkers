@@ -11,6 +11,8 @@ public class TurnosManager : Singleton<TurnosManager>
     [SerializeField] private Image panelP1 = null;
     [SerializeField] private Image panelP2 = null;
 
+    private bool blockTurnChange = false;
+
 
     public bool CanDoAction(PieceFiliation filiation)
     {
@@ -21,7 +23,14 @@ public class TurnosManager : Singleton<TurnosManager>
     }
 
     public void ChangeTurno()
-    {   
+    {
+
+        if (blockTurnChange)
+        {
+            blockTurnChange = false;
+            return;
+        }
+
         if(turnoFiliation == PieceFiliation.player1)
         {
             panelP1.gameObject.SetActive(false);
@@ -38,6 +47,11 @@ public class TurnosManager : Singleton<TurnosManager>
         }
         
         GameManager.Instance.OnTurnoChange();
+    }
+
+    public void BlockNextTurnChange()
+    {
+        blockTurnChange = true;
     }
 
 }
