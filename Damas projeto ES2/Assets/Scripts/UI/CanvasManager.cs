@@ -13,9 +13,15 @@ public class CanvasManager : Singleton<CanvasManager>
 
     private void Awake()
     {
+
         controllersDic = GetComponentsInChildren<CanvasController>(true).ToDictionary(controller => controller.canvasType, controller => controller);
         controllersDic.Select(kv => kv.Value).ToList().ForEach(value => value.CloseBehavior());
         SwitchState(openOnAwake);
+    }
+
+    private new void OnDestroy()
+    {
+        controllersDic.Clear();
     }
 
     public void SwitchState(CanvasType type)

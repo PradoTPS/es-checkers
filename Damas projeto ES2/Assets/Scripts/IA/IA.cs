@@ -41,7 +41,7 @@ public class IA : MonoBehaviour
         if (tileToMove == null)
         {
             Debug.LogError("No tiles to move");
-
+            yield break;
         }
 
         int randomNumber = Random.Range(0, movementList.Count);
