@@ -192,6 +192,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 790698336}
+    - target: {fileID: 6035544645850236388, guid: 93ff38811da3f8841b143c8e57c81e98,
+        type: 3}
+      propertyPath: openOnAwake
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6035544645850236389, guid: 93ff38811da3f8841b143c8e57c81e98,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -12,13 +12,19 @@ public class kingPieceTests
     {
         //Arrange
         var gameObject = new GameObject();
-        IKingPiece normalPiece = gameObject.AddComponent<KingPiece>();
+        PieceAbstract kingPiece = gameObject.AddComponent<KingPiece>();
 
-        //Act
-        var result = normalPiece.Move();
 
-        //Assert
+        kingPiece.Filiation = PieceFiliation.player1;
+        var result = kingPiece.Move();
         Assert.IsNotNull(result);
+
+
+        kingPiece.Filiation = PieceFiliation.player2;
+        var result2 = kingPiece.Move();
+        Assert.IsNotNull(result2);
+
+
     }
 
     [Test]
@@ -26,10 +32,10 @@ public class kingPieceTests
     {
         //Arrange
         var gameObject = new GameObject();
-        IKingPiece normalPiece = normalPiece = gameObject.AddComponent<KingPiece>();
+        PieceAbstract kingPiece = kingPiece = gameObject.AddComponent<KingPiece>();
 
         //Act
-        var result = normalPiece.Eat();
+        var result = kingPiece.Eat();
 
         //Assert
         Assert.IsNotNull(result);

@@ -12,13 +12,17 @@ public class normalPieceTests
     {
         //Arrange
         var gameObject = new GameObject();
-        INormalPiece normalPiece = gameObject.AddComponent<NormalPiece>();
+        PieceAbstract normalPiece = gameObject.AddComponent<NormalPiece>();
 
         //Act
+        normalPiece.Filiation = PieceFiliation.player1;
         var result = normalPiece.Move();
-
-        //Assert
         Assert.IsNotNull(result);
+
+        normalPiece.Filiation = PieceFiliation.player2;
+        var result2 = normalPiece.Move();
+        Assert.IsNotNull(result);
+        //Assert
     }
 
     [Test]
@@ -26,7 +30,7 @@ public class normalPieceTests
     {
         //Arrange
         var gameObject = new GameObject();
-        INormalPiece normalPiece = normalPiece = gameObject.AddComponent<NormalPiece>();
+        PieceAbstract normalPiece = normalPiece = gameObject.AddComponent<NormalPiece>();
 
         //Act
         var result = normalPiece.Eat();

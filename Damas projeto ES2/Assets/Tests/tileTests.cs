@@ -19,6 +19,7 @@ public class tileTests
         //Act
         int xCoord = 1;
         int yCoord = 1;
+
         tile.SetMatrixCoordinates(xCoord, yCoord);
 
         //Assert

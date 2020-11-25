@@ -321,6 +321,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6035544645850236388, guid: 93ff38811da3f8841b143c8e57c81e98,
+        type: 3}
+      propertyPath: openOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6035544645850236389, guid: 93ff38811da3f8841b143c8e57c81e98,
         type: 3}
       propertyPath: m_LocalPosition.x
