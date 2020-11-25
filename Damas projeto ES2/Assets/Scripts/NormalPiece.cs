@@ -9,7 +9,7 @@ public class NormalPiece : PieceAbstract, INormalPiece
     {
         List<PieceMoveV2> moveOptionsList = new List<PieceMoveV2>();
 
-        if(filiation == PieceFiliation.player1)
+        if(Filiation == PieceFiliation.player1)
         {
             moveOptionsList.Add(new PieceMoveV2(-1, 1));
             moveOptionsList.Add(new PieceMoveV2(1, 1));

@@ -61,7 +61,7 @@ public class IA : MonoBehaviour
         listToStoreMovements = new List<MovementInBoard>();
         foreach(var tile in board.tilesMatrix)
         {
-            if (tile.HasPiece && tile.MyPiece.filiation == myFiliation)
+            if (tile.HasPiece && tile.MyPiece.Filiation == myFiliation)
             {
                 var thisTileMove = board.CanEatAny(tile);
                 if (thisTileMove.Count > 0)
@@ -78,7 +78,7 @@ public class IA : MonoBehaviour
         {
             foreach(var tile in board.tilesMatrix)
             {
-                if (tile.HasPiece && tile.MyPiece.filiation == myFiliation)
+                if (tile.HasPiece && tile.MyPiece.Filiation == myFiliation)
                 {
                     var moveList = board.GetPositionsToMove(tile);
 

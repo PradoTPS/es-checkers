@@ -15,7 +15,7 @@ namespace Tests
         {
 
             //Arrange
-            GameManager.Instance.LoadScene("InGame");
+            GameManager.Instance.LoadScene("InGameVSPlayer");
             yield return new WaitForSeconds(1f);
 
             var board = Transform.FindObjectOfType<Board>();
@@ -32,7 +32,7 @@ namespace Tests
         {
 
             //Arrange
-            GameManager.Instance.LoadScene("InGame");
+            GameManager.Instance.LoadScene("InGameVSPlayer");
             yield return new WaitForSeconds(1f);
 
             var board = Transform.FindObjectOfType<Board>();
@@ -49,7 +49,7 @@ namespace Tests
         {
 
             //Arrange
-            GameManager.Instance.LoadScene("InGame");
+            GameManager.Instance.LoadScene("InGameVSPlayer");
             yield return new WaitForSeconds(1f);
 
             var board = Transform.FindObjectOfType<Board>();
@@ -66,7 +66,7 @@ namespace Tests
         public IEnumerator board_select_one_tile()
         {
             //Arrange
-            GameManager.Instance.LoadScene("InGame");
+            GameManager.Instance.LoadScene("InGameVSPlayer");
             yield return new WaitForSeconds(1f);
 
             var board = Transform.FindObjectOfType<Board>();
@@ -90,7 +90,7 @@ namespace Tests
         public IEnumerator board_unselect_tile()
         {
             //Arrange
-            GameManager.Instance.LoadScene("InGame");
+            GameManager.Instance.LoadScene("InGameVSPlayer");
             yield return new WaitForSeconds(1f);
 
             var board = Transform.FindObjectOfType<Board>();
