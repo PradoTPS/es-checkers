@@ -4,14 +4,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class pieceTest 
+public class kingPieceTests
 {
 
     [Test]
-    public void check_normal_piece_move_not_null()
+    public void check_king_piece_move_not_null()
     {
         //Arrange
-        INormalPiece normalPiece = Substitute.For<INormalPiece>();
+        var gameObject = new GameObject();
+        IKingPiece normalPiece = gameObject.AddComponent<KingPiece>();
 
         //Act
         var result = normalPiece.Move();
@@ -21,10 +22,11 @@ public class pieceTest
     }
 
     [Test]
-    public void check_normal_piece_eat_not_null()
+    public void check_king_piece_eat_not_null()
     {
         //Arrange
-        INormalPiece normalPiece = Substitute.For<INormalPiece>();
+        var gameObject = new GameObject();
+        IKingPiece normalPiece = normalPiece = gameObject.AddComponent<KingPiece>();
 
         //Act
         var result = normalPiece.Eat();
