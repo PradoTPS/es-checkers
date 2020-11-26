@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class IA : MonoBehaviour
@@ -40,7 +41,7 @@ public class IA : MonoBehaviour
 
         if (tileToMove == null)
         {
-            Debug.LogError("No tiles to move");
+            Debug.LogWarning("No tiles to move");
             yield break;
         }
 
@@ -57,8 +58,11 @@ public class IA : MonoBehaviour
 
     private Tile GetTileToMove(out List<MovementInBoard> listToStoreMovements)
     {
-        Tile tileToMove = null;
+        bool foundEatingTile = false;
         listToStoreMovements = new List<MovementInBoard>();
+        var tileDic = new Dictionary<Tile, List<MovementInBoard>>();
+
+
         foreach(var tile in board.tilesMatrix)
         {
             if (tile.HasPiece && tile.MyPiece.Filiation == myFiliation)
@@ -66,15 +70,15 @@ public class IA : MonoBehaviour
                 var thisTileMove = board.CanEatAny(tile);
                 if (thisTileMove.Count > 0)
                 {
-                    tileToMove = tile;
-                    listToStoreMovements = thisTileMove;
+                    tileDic.Add(tile, thisTileMove);
+                    foundEatingTile = true;
                     break;
                 }
             }
         }
 
 
-        if(tileToMove == null)
+        if(foundEatingTile == false)
         {
             foreach(var tile in board.tilesMatrix)
             {
@@ -84,15 +88,22 @@ public class IA : MonoBehaviour
 
                     if (moveList.Count > listToStoreMovements.Count)
                     {
-                        listToStoreMovements = moveList;
-                        tileToMove = tile;
+                        tileDic.Add(tile, moveList);
                     }
                 }
             }
         }
 
+        if (tileDic.Count == 0)
+        {
+            return null;
+        }
 
-        return tileToMove;
+        int randInt = Random.Range(0, tileDic.Count);
+        var randomTile = tileDic.Keys.ToList()[randInt];
+
+        listToStoreMovements = tileDic[randomTile];
+        return randomTile;
 
     }
 
